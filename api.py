@@ -14,3 +14,6 @@ def redirect_to_random_image():
     image_links = load_image_links('image_url.txt')  # 替换为你的图片链接文件路径
     random_link = random.choice(image_links)
     return redirect(random_link)
+
+if __name__ == '__main__':
+    app.run()
