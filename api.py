@@ -21,7 +21,7 @@ def count_lines(file):
         return sum(1 for _ in f)
 
 # 访问/diao-count时返回JSON内容
-@app.route('/diao-count')
+@app.route('/diao-count.py')
 def get_diao_count():
     line_count = count_lines('image_url.txt')  # 替换为你的图片链接文件路径
     data = {'count': line_count}
