@@ -9,13 +9,24 @@
             "src": "./diao-count.py",
             "use": "@vercel/python"
         },
-        { "src": "./public/*.*", "use": "@vercel/static" }
+        {
+            "src": "./public/*.*",
+            "use": "@vercel/static"
+        }
     ],
+    "functions": {
+            "./api.php": {
+                "runtime": "vercel-php@0.4.0"
+        }
+    },
     "routes": [
         {
             "src": "/(.*)",
             "dest": "/"
         },
-        { "src": "/index.html", "dest": "/public/index.html" }
+        {
+            "src": "/index.html",
+            "dest": "/public/index.html"
+        }
     ]
 }
