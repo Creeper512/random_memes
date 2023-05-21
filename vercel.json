@@ -11,8 +11,8 @@
             "dest": "/public/index.html"
         },
         {
-            "src": "/image_url.txt",
-            "dest": "/api/image_url.txt"
+            "src": "/api/image_url.txt",
+            "dest": "/image_url.txt"
         }
     ]
 }
