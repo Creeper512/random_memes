@@ -76,21 +76,21 @@
       // 显示获取中的提示文字
       buttonTextElement.textContent = "别急，我正在获取";
 
-      fetch("https://random-memes.348000.xyz/api", { mode: 'cors' })
-        .then(response => response.blob())
-        .then(blob => {
-          var imageURL = URL.createObjectURL(blob);
+      // 显示获取中的提示文字
+      imageElement.src = "";
+      imageElement.alt = "获取中...";
+
+      fetch("https://random-memes.348000.xyz/api")
+        .then(response => response.json())
+        .then(data => {
+          var imageURL = data.url;
           imageElement.src = imageURL;
-          // 图片加载完成后，更改提示文字
-          imageElement.onload = function() {
-            buttonTextElement.textContent = "再来一张吊图";
-          };
-          // 更新Fancybox链接
-          var memeLinkElement = document.getElementById("memeLink");
-          memeLinkElement.href = imageURL;
+          imageElement.alt = "吊图";
         })
         .catch(error => {
           console.log(error);
+          imageElement.src = "";
+          imageElement.alt = "获取失败";
         });
     }
 

@@ -38,18 +38,23 @@ if (isset($_GET['image']) && is_numeric($_GET['image'])) {
             // 获取对应行数的链接
             $url = $urls[$lineNumber - 1];
 
-            // 执行重定向
-            header("Access-Control-Allow-Origin:*");
-            header('Location: ' . $url);
+            // 返回 JSON 文本
+            $response = array('url' => $url);
+            header('Content-Type: application/json');
+            echo json_encode($response);
             exit;
         } else {
             // 行数无效，返回错误信息
-            echo '错误：无效的行数';
+            $response = array('error' => '无效的行数');
+            header('Content-Type: application/json');
+            echo json_encode($response);
             exit;
         }
     } else {
         // 文件不存在，返回错误信息
-        echo '错误：找不到图片链接文件';
+        $response = array('error' => '找不到图片链接文件');
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit;
     }
 }
@@ -64,29 +69,31 @@ if (file_exists($imageUrlFile)) {
         // 随机选择一个链接
         $randomUrl = $urls[array_rand($urls)];
 
-        // 执行重定向
-        header('Location: ' . $randomUrl);
+        // 返回 JSON 文本
+        $response = array('url' => $randomUrl);
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit;
     } else {
         // 链接为空，返回错误信息
-        echo '错误：图片链接文件中没有链接';
+        $response = array('error' => '图片链接文件中没有链接');
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
     }
 } else {
     // 文件不存在，返回错误信息
-    echo '错误：找不到图片链接文件';
+    $response = array('error' => '找不到图片链接文件');
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
 }
 
 // 列出上级目录下的所有文件和目录
 $files = scandir($parentDirectory);
 
 echo '<br><br>上级目录下的所有文件和目录：<br>';
-
-// 遍历文件和目录数组
 foreach ($files as $file) {
-    // 排除当前目录和上级目录
-    if ($file != '.' && $file != '..') {
-        // 输出文件或目录名称
-        echo $file . '<br>';
-    }
+    echo $file . '<br>';
 }
 ?>
