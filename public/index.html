@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,6 +88,9 @@
           var imageURL = data.url;
           imageElement.src = imageURL;
           imageElement.alt = "吊图";
+          // 更新Fancybox链接
+          var memeLinkElement = document.getElementById("memeLink");
+          memeLinkElement.href = imageURL;
         })
         .catch(error => {
           console.log(error);
