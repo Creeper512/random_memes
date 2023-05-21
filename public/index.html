@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
   <script async src="https://a.348000.xyz/script.js" data-website-id="a4299fc3-c397-4e90-a05e-5f3a73105cb1"></script>
   <style>
+    :root {
+      font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+
     .button {
       display: inline-block;
       background-color: #4CAF50;
@@ -51,6 +55,11 @@
         color: #339af0;
         text-decoration: none;
     }
+
+    .twikoo {
+    position: relative;
+    width: fit-content;
+    }
   </style>
 </head>
 <body>
@@ -65,6 +74,17 @@
     <div class="footer">by Creeper938 <a href="https://348000.xyz/posts/13229" target="_blank">博客</a><br>你知道吗：有 99.99% 的人不知道点击吊图可以放大图片</div>
     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Creeper512/random_memes?logo=github&style=flat-square">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Creeper512/random_memes?logo=github&style=flat-square">
+    <div id="tcomment"></div>
+    <script src="https://cdn.staticfile.org/twikoo/1.6.16/twikoo.all.min.js"></script>
+    <script>
+    twikoo.init({
+      envId: 'https://c.348000.xyz', // 腾讯云环境填 envId；Vercel 环境填地址（https://xxx.vercel.app）
+      el: '#tcomment', // 容器元素
+      // region: 'ap-guangzhou', // 环境地域，默认为 ap-shanghai，腾讯云环境填 ap-shanghai 或 ap-guangzhou；Vercel 环境不填
+      path: '/page-memes', // 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
+      // lang: 'zh-CN', // 用于手动设定评论区语言，支持的语言列表 https://github.com/imaegoo/twikoo/blob/main/src/client/utils/i18n/index.js
+    })
+    </script>
   </center>
 
   <script src="https://cdnjs.loli.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
