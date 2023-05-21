@@ -74,7 +74,7 @@
       var buttonTextElement = document.getElementById("buttonText");
 
       // 显示获取中的提示文字
-      buttonTextElement.textContent = "别急，我正在获取";
+      buttonTextElement.textContent = "再来一张！";
 
       // 显示获取中的提示文字
       imageElement.src = "";
@@ -120,8 +120,9 @@
 
     window.onload = function() {
       var infoElement = document.getElementById("info");
+      var randomParam = Math.random().toString(36).substr(2); // 生成随机参数
 
-      fetch("https://random-memes.348000.xyz/diao-count.py", { mode: 'cors' })
+      fetch("https://random-memes.348000.xyz/api?random=" + randomParam)
         .then(response => response.json())
         .then(data => {
           var count = data.count;
