@@ -1,19 +1,5 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "./api.py",
-            "use": "@vercel/python"
-        },
-        {
-            "src": "./diao-count.py",
-            "use": "@vercel/python"
-        },
-        {
-            "src": "./public/*.*",
-            "use": "@vercel/static"
-        }
-    ],
     "functions": {
             "./api.php": {
                 "runtime": "vercel-php@0.4.0"
