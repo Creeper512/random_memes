@@ -13,7 +13,7 @@ def get_last_commit_time(repo_owner, repo_name, file_path):
             return last_commit_time
     return None
 
-@app.route('/diao-count')
+@app.route('/diao-count.py')
 def get_diao_count():
     repo_owner = "Creeper512"
     repo_name = "random_memes"
