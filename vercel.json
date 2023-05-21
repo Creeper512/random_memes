@@ -8,7 +8,8 @@
         {
             "src": "./diao-count.py",
             "use": "@vercel/python"
-        }
+        },
+        { "src": "*.html", "use": "@vercel/static" }
     ],
     "routes": [
         {
