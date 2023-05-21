@@ -69,8 +69,11 @@ if (file_exists($imageUrlFile)) {
 
     // 检查是否存在链接
     if (count($urls) > 0) {
-        // 随机选择一个链接
-        $randomUrl = $urls[array_rand($urls)];
+        // 随机选择一个索引
+        $randomIndex = array_rand($urls);
+
+        // 获取随机索引对应的链接
+        $randomUrl = $urls[$randomIndex];
 
         // 返回 JSON 文本
         $response = array('url' => $randomUrl);
