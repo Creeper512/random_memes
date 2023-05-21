@@ -79,8 +79,9 @@
       // 显示获取中的提示文字
       imageElement.src = "";
       imageElement.alt = "获取中...";
+      var randomParam = Math.random().toString(36).substr(2); // 生成随机参数
 
-      fetch("https://random-memes.348000.xyz/api")
+      fetch("https://random-memes.348000.xyz/api.py?random=" + randomParam)
         .then(response => response.json())
         .then(data => {
           var imageURL = data.url;
@@ -120,9 +121,8 @@
 
     window.onload = function() {
       var infoElement = document.getElementById("info");
-      var randomParam = Math.random().toString(36).substr(2); // 生成随机参数
 
-      fetch("https://random-memes.348000.xyz/api?random=" + randomParam)
+      fetch("https://random-memes.348000.xyz/api?type=count")
         .then(response => response.json())
         .then(data => {
           var count = data.count;
