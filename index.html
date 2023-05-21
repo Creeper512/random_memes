@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>随机吊图</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
   <style>
     .button {
       display: inline-block;
@@ -35,6 +36,18 @@
       color: #555;
       font-size: 14px;
       margin-bottom: 20px;
+      line-height: 24px;
+    }
+
+    #memeImage {
+      max-width: 100%;
+      max-height: 400px;
+      margin-top: 20px;
+    }
+
+    a {
+        color: #339af0;
+        text-decoration: none;
     }
   </style>
 </head>
@@ -42,21 +55,45 @@
   <center>
     <h1>随机吊图</h1>
     <p id="info"></p>
-    <img id="memeImage" src="" alt="吊图">
+    <a id="memeLink" href="" data-fancybox><img id="memeImage" src="" alt="吊图"></a>
     <br>
     <button class="button" onclick="random_meme()"><span id="buttonText" class="text">下一张吊图</span></button>
     <div class="divider"></div>
-    <div class="footer">by Creeper938</div>
+    <div class="footer">by Creeper938 <a href="https://348000.xyz/posts/13229" target="_blank">博客</a><br>你知道吗：有 99.99% 的人不知道点击吊图可以放大图片</div>
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Creeper512/random_memes?logo=github&style=flat-square">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Creeper512/random_memes?logo=github&style=flat-square">
   </center>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
   <script>
     function random_meme() {
       var imageElement = document.getElementById("memeImage");
       var buttonTextElement = document.getElementById("buttonText");
-      var infoElement = document.getElementById("info");
 
       // 显示获取中的提示文字
-      buttonTextElement.textContent = "别急，我正在获取...";
+      buttonTextElement.textContent = "别急，我正在获取";
+
+      fetch("https://random-memes.348000.xyz/api.py", { mode: 'cors' })
+        .then(response => response.blob())
+        .then(blob => {
+          var imageURL = URL.createObjectURL(blob);
+          imageElement.src = imageURL;
+          // 图片加载完成后，更改提示文字
+          imageElement.onload = function() {
+            buttonTextElement.textContent = "再来一张吊图";
+          };
+          // 更新Fancybox链接
+          var memeLinkElement = document.getElementById("memeLink");
+          memeLinkElement.href = imageURL;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+
+    window.onload = function() {
+      var infoElement = document.getElementById("info");
 
       fetch("https://random-memes.348000.xyz/diao-count.py", { mode: 'cors' })
         .then(response => response.json())
@@ -66,28 +103,19 @@
 
           // 更新信息
           var currentDate = new Date().toLocaleDateString();
-          infoElement.textContent = "截至" + currentDate + "，共有 " + count + " 张吊图，最后一次更新为 " + lastCommitTime;
-
-          fetch("https://random-memes.348000.xyz/api.py", { mode: 'cors' })
-            .then(response => response.blob())
-            .then(blob => {
-              var imageURL = URL.createObjectURL(blob);
-              imageElement.src = imageURL;
-              // 图片加载完成后，更改提示文字
-              imageElement.onload = function() {
-                buttonTextElement.textContent = "再来一张吊图";
-              };
-            })
-            .catch(error => {
-              console.log(error);
-            });
+          infoElement.textContent = "截至 " + currentDate + "，共有 " + count + " 张吊图，最后一次更新日期为 " + lastCommitTime;
         })
         .catch(error => {
           console.log(error);
         });
-    }
-    
-    window.onload = random_meme;
+
+      random_meme();
+
+      // 初始化Fancybox
+      $("[data-fancybox]").fancybox({
+        buttons: ["zoom", "close", "download"]
+      });
+    };
   </script>
 </body>
 </html>
