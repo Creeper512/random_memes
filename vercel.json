@@ -9,6 +9,10 @@
         {
             "src": "/index.html",
             "dest": "/public/index.html"
+        },
+        {
+            "src": "/image_url.txt",
+            "dest": "/api/image_url.txt"
         }
     ]
 }
