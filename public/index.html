@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>随机吊图</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+  <script async src="https://a.348000.xyz/script.js" data-website-id="a4299fc3-c397-4e90-a05e-5f3a73105cb1"></script>
   <style>
     .button {
       display: inline-block;
@@ -54,18 +55,19 @@
 <body>
   <center>
     <h1>随机吊图</h1>
-    <p id="info"></p>
-    <a id="memeLink" href="" data-fancybox><img id="memeImage" src="" alt="吊图"></a>
+    <p id="info">正在获取信息。。。</p>
+    <a id="memeLink" href="" data-fancybox><img id="memeImage" src="" alt="正在加载。。。"></a>
     <br>
     <button class="button" onclick="random_meme()"><span id="buttonText" class="text">下一张吊图</span></button>
     <div class="divider"></div>
+    <div id="quote"></div>
     <div class="footer">by Creeper938 <a href="https://348000.xyz/posts/13229" target="_blank">博客</a><br>你知道吗：有 99.99% 的人不知道点击吊图可以放大图片</div>
     <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Creeper512/random_memes?logo=github&style=flat-square">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Creeper512/random_memes?logo=github&style=flat-square">
   </center>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
   <script>
     function random_meme() {
       var imageElement = document.getElementById("memeImage");
@@ -86,6 +88,30 @@
           // 更新Fancybox链接
           var memeLinkElement = document.getElementById("memeLink");
           memeLinkElement.href = imageURL;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+
+    fetch("https://v1.hitokoto.cn/?c=l")
+        .then(response => response.json())
+        .then(data => {
+          var quoteElement = document.getElementById("quote");
+          var refreshQuoteLink = document.getElementById("refreshQuote");
+          quoteElement.innerHTML = data.hitokoto + ' <a id="refreshQuote" href="#" onclick="refresh_quote()">再来一句五毛的</a>';
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+    function refresh_quote() {
+      fetch("https://v1.hitokoto.cn/?c=l")
+        .then(response => response.json())
+        .then(data => {
+          var quoteElement = document.getElementById("quote");
+          var refreshQuoteLink = document.getElementById("refreshQuote");
+          quoteElement.innerHTML = data.hitokoto + ' <a id="refreshQuote" href="#" onclick="refresh_quote()">再来一句五毛的</a>';
         })
         .catch(error => {
           console.log(error);
