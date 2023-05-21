@@ -5,6 +5,25 @@ $parentDirectory = dirname(__DIR__);
 // 图片链接文件路径
 $imageUrlFile = $parentDirectory . '/image_url.txt';
 
+// 检查请求参数
+if (isset($_GET['type']) && $_GET['type'] === 'count') {
+    // 检查图片链接文件是否存在
+    if (file_exists($imageUrlFile)) {
+        // 读取图片链接行数
+        $lineCount = count(file($imageUrlFile, FILE_IGNORE_NEW_LINES));
+
+        // 返回 JSON 文本
+        $response = array('count' => $lineCount);
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
+    } else {
+        // 文件不存在，返回错误信息
+        echo '错误：找不到图片链接文件';
+        exit;
+    }
+}
+
 // 检查图片链接文件是否存在
 if (file_exists($imageUrlFile)) {
     // 读取图片链接

@@ -76,7 +76,7 @@
       // 显示获取中的提示文字
       buttonTextElement.textContent = "别急，我正在获取";
 
-      fetch("https://random-memes.348000.xyz/api.py", { mode: 'cors' })
+      fetch("https://random-memes.348000.xyz/api", { mode: 'cors' })
         .then(response => response.blob())
         .then(blob => {
           var imageURL = URL.createObjectURL(blob);
