@@ -15,6 +15,6 @@
             "src": "/(.*)",
             "dest": "/"
         },
-        { "src": "/", "dest": "/index.html" }
+        { "src": "/index.html", "dest": "/public/index.html" }
     ]
 }
