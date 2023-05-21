@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>随机吊图</title>
+  <script>
+    function random_meme() {
+      var imageElement = document.getElementById("memeImage");
+      fetch("https://random-memes.348000.xyz/api.py")
+        .then(response => response.json())
+        .then(data => {
+          imageElement.src = data.url;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+    
+    window.onload = random_meme;
+  </script>
+  <style>
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      padding: 10px;
+      width: 150px;
+      transition: all 0.5s;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .text {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <h1>随机吊图</h1>
+    <img id="memeImage" src="" alt="吊图">
+    <br>
+    <button class="button" onclick="random_meme()"><span class="text">下一张吊图</span></button>
+  </center>
+</body>
+</html>
