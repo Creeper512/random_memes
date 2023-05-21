@@ -81,7 +81,7 @@
       imageElement.alt = "获取中...";
       var randomParam = Math.random().toString(36).substr(2); // 生成随机参数
 
-      fetch("https://random-memes.348000.xyz/api.py?random=" + randomParam)
+      fetch("https://random-memes.348000.xyz/api?random=" + randomParam)
         .then(response => response.json())
         .then(data => {
           var imageURL = data.url;
