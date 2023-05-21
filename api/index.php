@@ -24,6 +24,36 @@ if (isset($_GET['type']) && $_GET['type'] === 'count') {
     }
 }
 
+// 检查请求参数 image
+if (isset($_GET['image']) && is_numeric($_GET['image'])) {
+    $lineNumber = intval($_GET['image']);
+
+    // 检查图片链接文件是否存在
+    if (file_exists($imageUrlFile)) {
+        // 读取图片链接
+        $urls = file($imageUrlFile, FILE_IGNORE_NEW_LINES);
+
+        // 检查行数是否有效
+        if ($lineNumber >= 1 && $lineNumber <= count($urls)) {
+            // 获取对应行数的链接
+            $url = $urls[$lineNumber - 1];
+
+            // 执行重定向
+            header("Access-Control-Allow-Origin:*");
+            header('Location: ' . $url);
+            exit;
+        } else {
+            // 行数无效，返回错误信息
+            echo '错误：无效的行数';
+            exit;
+        }
+    } else {
+        // 文件不存在，返回错误信息
+        echo '错误：找不到图片链接文件';
+        exit;
+    }
+}
+
 // 检查图片链接文件是否存在
 if (file_exists($imageUrlFile)) {
     // 读取图片链接
