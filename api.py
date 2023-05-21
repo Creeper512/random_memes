@@ -1,13 +1,15 @@
 import random
 from flask import Flask, redirect, current_app
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
 
 # 从指定链接读取图片链接列表
 def load_image_links(link_file):
-    with open(link_file, 'r') as file:
+    file_path = os.path.join(app.root_path, link_file)
+    with open(file_path, 'r') as file:
         return [line.strip() for line in file]
 
 # 随机重定向到一个图片链接
